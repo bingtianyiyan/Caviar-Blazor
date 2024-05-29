@@ -8,11 +8,11 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="6.0.10" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.10" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="6.0.3" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\tests\Caviar.IntegrationTests\Caviar.IntegrationTests.csproj" />
+    <ProjectReference Include="..\..\..\..\src\Caviar.Infrastructure\Caviar.Infrastructure.csproj" />
     <ProjectReference Include="..\Client\Caviar.Demo.Wasm.Client.csproj" />
   </ItemGroup>
 

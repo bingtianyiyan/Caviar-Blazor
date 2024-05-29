@@ -45,10 +45,12 @@ builder.Services
 builder.Services.AddCaviar();
 builder.Services.AddCaviarDbContext(options =>
 //选择使用mysql或者sqlserver，其他的数据库只要efcore支持，本框架都支持
-options.UseSqlServer(
-builder.Configuration.GetConnectionString("DefaultConnection")
+//options.UseSqlServer(
+//builder.Configuration.GetConnectionString("DefaultConnection")
 //options.UseMySQL(
 //Configuration.GetConnectionString("DefaultConnection")
+options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"), Microsoft.EntityFrameworkCore.ServerVersion.Parse("5.7.28-mysql")
+
 , b => b.MigrationsAssembly("Caviar.Demo.Hybrid")));
 //跨域
 builder.Services.AddCors(options =>
