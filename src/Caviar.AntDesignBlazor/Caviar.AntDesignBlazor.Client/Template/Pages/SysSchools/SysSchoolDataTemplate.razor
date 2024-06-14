@@ -1,0 +1,45 @@
+@*
+// Copyright (c) BeiYinZhiNian (1031622947@qq.com). All rights reserved.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Website: http://www.caviar.wang/ or https://gitee.com/Cherryblossoms/caviar.
+// 生成者：
+// 生成时间：2024-05-26 13:35:07
+*@
+@using Caviar.AntDesignBlazor.Client.Entity
+@using Caviar.AntDesignBlazor.Client.View
+@page "/SysSchool/CreateEntity"
+@page "/SysSchool/UpdateEntity"
+@inherits DataComponentBase<SysSchoolView,SysSchool>
+
+<Form @ref="_meunForm"
+      LabelColSpan="6"
+      WrapperColSpan="16"
+      Model="@DataSource"
+      OnFinish="FormSubmit"
+      ValidateMode="@FormValidateMode.Rules"
+      ValidateOnChange="true">
+    <CavFormItem FieldName='SchoolName' FieldRules='@context.Entity'>
+        <Input DebounceMilliseconds='-1' @bind-Value='@context.Entity.SchoolName' />
+    </CavFormItem>
+    <CavFormItem FieldName='Principal' FieldRules='@context.Entity'>
+        <Input DebounceMilliseconds='-1' @bind-Value='@context.Entity.Principal' />
+    </CavFormItem>
+    <CavFormItem FieldName='Email' FieldRules='@context.Entity'>
+        <Input DebounceMilliseconds='-1' @bind-Value='@context.Entity.Email' />
+    </CavFormItem>
+    <CavFormItem FieldName='SchoolType' FieldRules='@context.Entity'>
+        <EnumRadioGroup TEnum='SchoolTypeEnum' @bind-Value='@context.Entity.SchoolType' Options='GetRadioOptions<SchoolTypeEnum>()' />
+    </CavFormItem>
+    <CavFormItem FieldName='Number' FieldRules='@context.Entity'>
+        <Input DebounceMilliseconds='-1' @bind-Value='@context.Entity.Number' />
+    </CavFormItem>
+    <CavFormItem FieldName='Address' FieldRules='@context.Entity'>
+        <Input DebounceMilliseconds='-1' @bind-Value='@context.Entity.Address' />
+    </CavFormItem>
+    <CavFormItem FieldName='IsDisable' FieldRules='@context.Entity'>
+        <Switch @bind-Value='@context.Entity.IsDisable' />
+    </CavFormItem>
+    <CavFormItem FieldName='Remark' FieldRules='@context.Entity'>
+        <TextArea Placeholder='@LanguageService[$"{CurrencyConstant.Page}.{CurrencyConstant.InputRemark}"]' AllowClear='true' @bind-Value='@context.Entity.Remark' />
+    </CavFormItem>
+</Form>
