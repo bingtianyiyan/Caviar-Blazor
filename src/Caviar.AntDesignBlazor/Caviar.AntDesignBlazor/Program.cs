@@ -1,19 +1,20 @@
-using Caviar.AntDesignUI;
+ï»¿using Caviar.AntDesignUI;
 using Caviar.Infrastructure;
 using Caviar.AntDesignBlazor.Components;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Caviar.Core.Services;
+using Caviar.ServiceDefaults;
 
 var builder = WebApplication.CreateBuilder(args);
-
+builder.AddServiceDefaults();
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents()
     .AddInteractiveWebAssemblyComponents();
 
-//Éí·İÑéÖ¤ÅäÖÃ
+//èº«ä»½éªŒè¯é…ç½®
 builder.Services.Configure<IdentityOptions>(options =>
 {
     options.Password.RequireDigit = false;
@@ -27,13 +28,13 @@ builder.Services.Configure<IdentityOptions>(options =>
 
     options.User.RequireUniqueEmail = true;
 });
-//cookiesÅäÖÃ
+//cookiesé…ç½®
 builder.Services.ConfigureApplicationCookie(options =>
 {
     options.Cookie.HttpOnly = true;
     options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
 });
-//cookiesÑéÖ¤ÅäÖÃ
+//cookieséªŒè¯é…ç½®
 builder.Services
     .AddAuthentication(cfg =>
     {
@@ -50,22 +51,22 @@ builder.Services.Configure<CookiePolicyOptions>(options =>
 });
 
 // Add services to the container.
-//builder.Services.AddRazorPages();   //cshtmlÒ³Ãæ£¬razor Ò³Ãæ
+//builder.Services.AddRazorPages();   //cshtmlé¡µé¢ï¼Œrazor é¡µé¢
 
 Caviar.AntDesignBlazor.Client.Program.PublicInit();
 
-//¿Í»§¶ËÅäÖÃ
+//å®¢æˆ·ç«¯é…ç½®
 builder.Services.AddCaviarServer();
 builder.Services.AddAdminCaviar(new Type[] { typeof(Program), typeof(Caviar.AntDesignBlazor.Client._Imports) });
 
-//·şÎñ¶ËÅäÖÃ
+//æœåŠ¡ç«¯é…ç½®
 builder.Services.AddCaviar();
 builder.Services.AddCaviarDbContext(options =>
 
 options.UseMySql(
 builder.Configuration.GetConnectionString("DefaultConnection"), ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("DefaultConnection"))
 , b => b.MigrationsAssembly("Caviar.AntDesignBlazor")));
-//¿çÓò
+//è·¨åŸŸ
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("CorsPolicy",
@@ -73,7 +74,7 @@ builder.Services.AddCors(options =>
             .AllowAnyMethod()
             .AllowAnyHeader());
 });
-//¿ØÖÆÆ÷
+//æ§åˆ¶å™¨
 builder.Services.AddControllers();
 
 var app = builder.Build();
@@ -99,12 +100,12 @@ app.UseHttpsRedirection();
 
 app.UseAntiforgery();
 
-//app.MapRazorPages();      //cshtmlÒ³Ãæ£¬razor Ò³Ãæ
+//app.MapRazorPages();      //cshtmlé¡µé¢ï¼Œrazor é¡µé¢
 app.MapControllers();
-//app.MapBlazorHub();       //ÓÃÓÚÅäÖÃ Blazor µÄ SignalR Hub ÖÕ½áµã
+//app.MapBlazorHub();       //ç”¨äºé…ç½® Blazor çš„ SignalR Hub ç»ˆç»“ç‚¹
 //app.MapFallbackToPage("_Host");
 
-app.MapRazorComponents<Caviar.AntDesignBlazor.Components.App>()     //MapRazorComponents ÅäÖÃrazor×é¼ş
+app.MapRazorComponents<Caviar.AntDesignBlazor.Components.App>()     //MapRazorComponents é…ç½®razorç»„ä»¶
     .AddInteractiveServerRenderMode()
     .AddInteractiveWebAssemblyRenderMode()
     .AddAdditionalAssemblies(typeof(Caviar.AntDesignBlazor.Client._Imports).Assembly, typeof(Caviar.AntDesignUI._Imports).Assembly);
