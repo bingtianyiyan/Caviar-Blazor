@@ -63,7 +63,7 @@ namespace Caviar.AntDesignUI.Shared
         }
 
 
-        void OnDateTimeChange(QueryModel queryModel, DateTimeChangedEventArgs dateTimeChanged)
+        void OnDateTimeChange(QueryModel queryModel, DateTimeChangedEventArgs<DateTime?> dateTimeChanged)
         {
             OnValueChange(queryModel, dateTimeChanged.DateString);
         }

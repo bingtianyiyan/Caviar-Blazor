@@ -28,10 +28,6 @@ namespace Caviar.AntDesignUI.Core
         public bool IsAutomaticSwitchWasm { get; set; } = true;
         public IJSRuntime JSRuntime { get; set; }
         /// <summary>
-        /// 路由
-        /// </summary>
-        public static Router Router;
-        /// <summary>
         /// 更新菜单数据
         /// </summary>
         public Action RefreshMenuAction { get; set; }
@@ -44,11 +40,11 @@ namespace Caviar.AntDesignUI.Core
         static IEnumerable _routes;
         public static IEnumerable Routes()
         {
-            if (_routes == null)
-            {
-                var routes = Router.GetObjValue("Routes");
-                _routes = (IEnumerable)routes.GetObjValue("Routes");
-            }
+            //if (_routes == null)
+            //{
+            //    var routes = Router.GetObjValue("Routes");
+            //    _routes = (IEnumerable)routes.GetObjValue("Routes");
+            //}
             return _routes;
         }
         /// <summary>

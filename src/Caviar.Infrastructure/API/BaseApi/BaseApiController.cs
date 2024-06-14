@@ -125,8 +125,8 @@ namespace Caviar.Infrastructure.API.BaseApi
             var menuPermission = _permissionServices.GetPermissionsAsync(roleIds, u => u.PermissionType == (int)PermissionType.RoleMenus).Result;
             _interactor.PermissionUrls = _permissionServices.GetPermissionsAsync(menuPermission);
             var url = _interactor.Current_Action.Remove(0, CurrencyConstant.Api.Length + 1);
-            if (IgnoreUrl.Contains(url)) return true;
-            return _interactor.PermissionUrls.Contains(url);
+            if (IgnoreUrl.Any(item => item.Equals(url, StringComparison.OrdinalIgnoreCase))) return true;
+            return _interactor.PermissionUrls.Any(item => item.Equals(url, StringComparison.OrdinalIgnoreCase));
         }
 
         protected virtual void UrlUnauthorized(ActionExecutingContext context)

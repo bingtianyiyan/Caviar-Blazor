@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Reflection;
 using System.Threading.Tasks;
 using AntDesign;
 using Caviar.AntDesignUI.Core;
@@ -73,7 +74,11 @@ namespace Caviar.AntDesignUI.Shared
         {
             if (menuItem == null) return null;
             var breadcrumbItemArr = new List<string>();
-            var parent = menuItem.ParentMenu;
+            // 获取类型信息
+            Type type = menuItem.GetType();
+            // 获取属性信息，ParentMenu为internal，原本为public
+            PropertyInfo propertyInfo = type.GetProperty("ParentMenu", BindingFlags.NonPublic | BindingFlags.Instance)!;
+            var parent = (SubMenu)propertyInfo.GetValue(menuItem)!;
             while (parent != null)
             {
                 var name = LanguageService[$"{CurrencyConstant.Menu}.{parent.Key}"];

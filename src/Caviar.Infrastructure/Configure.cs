@@ -15,10 +15,13 @@ using Caviar.SharedKernel.Common;
 using Caviar.SharedKernel.Entities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.AspNetCore.Hosting.Server.Features;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 
@@ -70,25 +73,30 @@ namespace Caviar.Infrastructure
                 var uri = GetServerUri();
                 if (uri != null)
                 {
-                    client.BaseAddress = new Uri($"{config.Urls.Replace("0.0.0.0", "localhost")}/{CurrencyConstant.Api}");
+                    client.BaseAddress = new Uri($"{uri.AbsoluteUri.Replace("0.0.0.0", "localhost")}{CurrencyConstant.Api}");
                 }
                 return client;
             });
             return services;
         }
 
-        private static Uri GetServerUri()
+        private static Uri? GetServerUri()
         {
             if (ServerAddressesFeature?.Addresses == null
                  || ServerAddressesFeature.Addresses.Count == 0)
             {
+                //throw new Exception("IServerAddressesFeature null");
                 return null;
             }
-            var insideIIS = Environment.GetEnvironmentVariable("APP_POOL_ID") is string;
+            //var insideIIS = Environment.GetEnvironmentVariable("APP_POOL_ID") is string;
 
-            var address = ServerAddressesFeature.Addresses
-                .FirstOrDefault(a => a.StartsWith($"http{(insideIIS ? "s" : "")}:"))
-                ?? ServerAddressesFeature.Addresses.First();
+            //var address = ServerAddressesFeature.Addresses
+            //    .FirstOrDefault(a => a.StartsWith($"http{(insideIIS ? "s" : "")}:"))
+            //    ?? ServerAddressesFeature.Addresses.First();
+
+            UriHelper.FromAbsolute(ServerAddressesFeature?.Addresses?.FirstOrDefault()?.Replace("*", "localhost"),
+                        out string scheme, out HostString host, out PathString path, out QueryString query, out FragmentString fragment);
+            var address = UriHelper.BuildAbsolute(scheme, host);
 
             var uri = new Uri(address);
             return uri;

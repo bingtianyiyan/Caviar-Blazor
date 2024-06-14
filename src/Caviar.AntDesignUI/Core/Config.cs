@@ -22,7 +22,18 @@ namespace Caviar.AntDesignUI
         /// <summary>
         /// 是否为server模式
         /// </summary>
-        public static bool IsServer { get; set; } = true;
+        public static bool IsServer
+        {
+            get
+            {
+                if (OperatingSystem.IsBrowser())
+                {
+                    return false;
+                }
+                return true;
+            }
+        }
+
         public static bool IsDebug { get; set; } = false;
         public static int MaxPageSize { get; set; } = 9999;
         /// <summary>
@@ -36,7 +47,7 @@ namespace Caviar.AntDesignUI
 
         public static WebAssemblyHostBuilder AddCavWasm(this WebAssemblyHostBuilder builder)
         {
-            IsServer = false;
+            //IsServer = false;
             builder.Services.AddScoped<IAuthService, WasmAuthService>();
             builder.Services.AddOptions();
             builder.Services.AddAuthorizationCore();

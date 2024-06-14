@@ -10,23 +10,23 @@ namespace Caviar.SharedKernel.Entities
     {
         public CodeGeneration IndexOptions { get; set; } = new CodeGeneration()
         {
-            StorePath = "../Caviar.Demo.Wasm/Template/",
-            NameSpace = "Caviar.Demo.Wasm.Pages"
+            StorePath = "../Cariar.BlazorApp.Client/Template/",
+            NameSpace = "Cariar.BlazorApp.Client.Pages"
         };
         public CodeGeneration DataTemplateOptions { get; set; } = new CodeGeneration()
         {
-            StorePath = "../Caviar.Demo.Wasm/Template/",
-            NameSpace = "Caviar.Demo.Wasm.Pages"
+            StorePath = "../Cariar.BlazorApp.Client/Template/",
+            NameSpace = "Cariar.BlazorApp.Client.Pages"
         };
         public CodeGeneration ControllerOptions { get; set; } = new CodeGeneration()
         {
-            StorePath = "../Caviar.Demo.Hybrid/Template/API/",
+            StorePath = "../Cariar.BlazorApp/Template/API/",
             NameSpace = "Caviar.Infrastructure.API"
         };
 
         public CodeGeneration ViewModelOptions { get; set; } = new CodeGeneration()
         {
-            StorePath = "../Caviar.Demo.Hybrid/Template/View/",
+            StorePath = "../Cariar.BlazorApp/Template/View/",
             NameSpace = "Caviar.SharedKernel.Entities.View"
         };
 
@@ -51,10 +51,6 @@ namespace Caviar.SharedKernel.Entities
         /// 是否处于演示模式
         /// </summary>
         public bool DemonstrationMode { get; set; }
-        /// <summary>
-        /// 用户配置的启动地址
-        /// </summary>
-        public string Urls { get; set; }
     }
 
     public class CodeGeneration

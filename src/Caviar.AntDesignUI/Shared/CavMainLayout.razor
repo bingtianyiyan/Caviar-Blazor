@@ -8,9 +8,9 @@
     }
     else
     {
-        <Sider Collapsible CollapsedWidth="CollapsedWidth" Collapsed=@Collapsed
-           OnCollapse=@OnCollapse NoTrigger Breakpoint="@BreakpointType.Lg"
-           Style="overflow: auto; height: 100vh; position: fixed; left: 0;" Theme="Layout.SiderTheme">
+        <Sider Collapsible CollapsedWidth="CollapsedWidth" Collapsed=@Collapsed CollapsedChanged="@OnCollapse"
+               NoTrigger Breakpoint="@BreakpointType.Lg"
+               Style="overflow: auto; height: 100vh; position: fixed; left: 0;" Theme="Layout.SiderTheme">
             <div class="logo" align="center">
                 <img src="@LogoImgSrc" height="32" />
             </div>
@@ -33,13 +33,14 @@
                 <CavPopover></CavPopover>
             </div>
         </Header>
-        @if(Layout.IsTable)
+        @if (Layout.IsTable)
         {
             <Content Style="@Layout.ContentStyle">
                 <ReuseTabs Class="top-row px-4" TabPaneClass="content px-4" />
             </Content>
         }
-        else{
+        else
+        {
             <div style="margin: 12px 16px;">
                 <CavBreadcrumb BreadcrumbItemArr="@BreadcrumbItemArr"></CavBreadcrumb>
             </div>
@@ -47,7 +48,7 @@
                 @Body
             </Content>
         }
-        
+
         <CavFooter></CavFooter>
     </Layout>
 </Layout>

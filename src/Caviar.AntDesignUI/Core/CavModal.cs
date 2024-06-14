@@ -100,28 +100,19 @@ namespace Caviar.AntDesignUI.Core
 
             public RenderFragment Render(string url, string title, IEnumerable<KeyValuePair<string, object>> paramenter) => builder =>
             {
+                var componentType = PageTypeResolver.ResolvePageType(url);
                 if (url[0] == '/') url = url[1..];
-                var routes = UserConfig.Routes();
-                foreach (var item in routes)
+                var index = 0;
+                builder.OpenElement(index++, "div");
+                builder.OpenComponent(index++, componentType);
+                if (paramenter != null && paramenter.Any())
                 {
-                    var page = (string)item.GetObjValue("Template").GetObjValue("TemplateText");
-                    if (page.ToLower() == url.ToLower())
-                    {
-                        var componentType = (Type)item.GetObjValue("Handler");
-                        var index = 0;
-                        builder.OpenElement(index++, "div");
-                        builder.OpenComponent(index++, componentType);
-                        if (paramenter != null && paramenter.Any())
-                        {
-                            builder.AddMultipleAttributes(index++, paramenter);
-                        }
-                        builder.AddComponentReferenceCapture(index++, SetComponent);
-                        builder.CloseComponent();
-                        builder.CloseElement();
-                        return;
-                    }
+                    builder.AddMultipleAttributes(index++, paramenter);
                 }
-                _messageService.Error(_languageService[$"{CurrencyConstant.Page}.{CurrencyConstant.ComponentErrorMsg}"].Replace("{title}", title).Replace("{url}", url));
+                builder.AddComponentReferenceCapture(index++, SetComponent);
+                builder.CloseComponent();
+                builder.CloseElement();
+                return;
             };
 
 
