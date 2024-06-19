@@ -10,9 +10,10 @@ var launchProfileName = ShouldUseHttpForEndpoints() ? "http" : "https";
 var webApp = builder.AddProject<Projects.Caviar_AntDesignBlazor>("CaviarAntDesignBlazor",launchProfileName)
      //The OTLP endpoint. This endpoint hosts an OTLP service and receives telemetry. When the dashboard is launched by the .NET Aspire app host this address is secured with HTTPS.
      //Securing the dashboard with HTTPS is recommended.
-     // .WithEnvironment("DOTNET_DASHBOARD_URL", "http://192.168.99.100:18888")
-     // .WithEnvironment("OTEL_EXPORTER_OTLP_ENDPOINT", "http://192.168.99.100:18889")
-     ////.WithEnvironment("RESOURCE_SERVICE_ENDPOINT_URL", "http://192.168.99.100:18889")
+      .WithEnvironment("DOTNET_DASHBOARD_URL", "http://192.168.99.100:18888")
+       .WithEnvironment("OTEL_EXPORTER_OTLP_PROTOCOL", "grpc")
+      .WithEnvironment("OTEL_EXPORTER_OTLP_ENDPOINT", "http://192.168.99.100:4317")
+     //.WithEnvironment("RESOURCE_SERVICE_ENDPOINT_URL", "http://192.168.99.100:18889")
     .WithExternalHttpEndpoints();
 builder.Build().Run();
 
