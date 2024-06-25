@@ -26,4 +26,10 @@
     <ProjectReference Include="..\..\Caviar.AntDesignUI\Caviar.AntDesignUI.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Entity\" />
+    <Folder Include="Template\Pages\" />
+    <Folder Include="Template\Views\" />
+  </ItemGroup>
+
 </Project>

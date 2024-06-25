@@ -1,123 +1,29 @@
 ﻿@page "/"
 @using System.ComponentModel
+@using AntDesign.Charts
 @attribute [ReuseTabsPageTitle("home")]
 
-<Card Bordered="true" Title=@("框架简介") Hoverable="true">
+<Card Bordered="true" Hoverable="true">
     <Body>
-        <Text>Caviar(鱼子酱)框架创建于2021年2月3日</Text>
-        <br>
-        <Text>
-            caviar框架简单大方现代，包含了后台管理基础功能，在开发上为了方便，封装了很多Ant Design组件，包含了自动列表、
-            高级搜索、自动化菜单、布局等。在代码生成上做到了100%的代码隔离，有修改，重新代码生成，不会对开发者有任何影响，并且不会降低开发的灵活性。
-            在权限设计上，可以控制任意一个字段、菜单、按钮、api、甚至是元素。
-            在外观上，界面风格统一，做了很多兼容，包括手机端，可以在手机端也有较好的体验。
-        </Text>
-        <br>
+        <Line Data="data" Config="config" />
     </Body>
 </Card>
 <Divider><Title Level="3">功能特性</Title></Divider>
 
 <Space Size=@(("10", "10" )) Wrap Align="start" Style="padding:10px">
     <SpaceItem>
+        <Histogram Data="data1" Config="config1" />
+     </SpaceItem>
+    <SpaceItem>
+        <Funnel Data="data3" Config="config3" />
+    </SpaceItem>
+ @*    <SpaceItem>
         <Card Bordered="true" Title=@("🍬多种模式") Hoverable="true" Style="height:260px;width:300px">
             <Body>
-                <Text>1、支持使用wasm和server模式</Text>
-                <br>
-                <Text>2、一套代码，即可使用两种模式，无需其他任何配置</Text>
-                <br>
-                <Text>3、支持wasm和server任意切换，在任何情况下都可以随意切换</Text>
-                <br>
-                <Text>4、全网首先实现了使用server模式进行加载，提升加载速度，无感切换到wasm模式，使用浏览器渲染，节省资源</Text>
-                <br>
+                <Histogram Data="data1" Config="config1" />
             </Body>
         </Card>
-    </SpaceItem>
-    <SpaceItem>
-        <Card Bordered="true" Title=@("🏁权限控制") Hoverable="true" Style="height:260px;width:300px">
-            <Body>
-                <Text>1、拥有字段、菜单、资源、按钮等多种权限</Text>
-                <br>
-                <Text>2、权限细化至可控制任意元素</Text>
-                <br>
-                <Text>3、可配置不同角色的不同权限，相同的地址展示不同元素</Text>
-                <br>
-                <Text>4、控制角色可访问的数据权限</Text>
-                <br>
-            </Body>
-        </Card>
-    </SpaceItem>
-    <SpaceItem>
-        <Card Bordered="true" Title=@("🌈代码生成") Hoverable="true" Style="height:260px;width:300px">
-            <Body>
-                <Text>1、一键生成前后端代码，做到100%代码隔离</Text>
-                <br>
-                <Text>2、经过精心设计，生成任何代码可以进行重写，再也不怕重新生成代码</Text>
-                <br>
-                <Text>3、减少代码生成带来的僵硬状态，以更加灵活的技巧减少烦恼</Text>
-                <br>
-            </Body>
-        </Card>
-    </SpaceItem>
-    <SpaceItem>
-        <Card Bordered="true" Title=@("🎁内置功能") Hoverable="true" Style="height:260px;width:300px">
-            <Body>
-                <Text>1、日志管理、菜单管理、附件管理、部门管理、用户管理、角色管理、代码生成等</Text>
-                <br>
-                <Text>2、支持table页和单页面</Text>
-                <br>
-                <Text>3、后续还会开放更多功能如：邮箱、登录页面、网站设置等</Text>
-                <br>
-            </Body>
-        </Card>
-    </SpaceItem>
-    <SpaceItem>
-        <Card Bordered="true" Title=@("📱多样性") Hoverable="true" Style="height:260px;width:300px">
-            <Body>
-                <Text>1、兼容PC、手机、Ipad，一处运行，到处使用</Text>
-                <br>
-                <Text>
-                    2、支持各种数据库，SqlServer、MySql、Oracle等等
-                    <a href="https://docs.microsoft.com/en-us/ef/core/providers/?tabs=dotnet-core-cli" target="_blank">支持列表</a>
-                </Text>
-                <br>
-                <Text>3、多语言支持</Text>
-                <br>
-                <Text>4、多主题任意切换</Text>
-                <br>
-                <Text>5、高级搜索，支持任意模型，生成即用</Text>
-                <br>
-            </Body>
-        </Card>
-    </SpaceItem>
-    <SpaceItem>
-        <Card Bordered="true" Title=@("🔗资源") Hoverable="true" Style="height:260px;width:300px">
-            <Body>
-                <Text>前端框架：</Text>
-                <a target="_blank" href="https://ant-design-blazor.gitee.io/zh-CN/components/overview">Ant Design Blazor</a>
-                <br>
-                <Text>开源地址：</Text>
-                <a href="https://gitee.com/Cherryblossoms/caviar" target="_blank">Gitee</a>
-                <br>
-                <Text>开源地址：</Text>
-                <a href="https://github.com/BeiYinZhiNian/Caviar" target="_blank">GitHub</a>
-                <br>
-                <Text>QQ交流群：</Text>
-                <a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=iLSuVhcAT_JHhRjj1UvB6i6-__PDMrT1&jump_from=webapi">加入QQ群</a>
-                <br>
-                <Text><a href="http://docs.caviar.wang" target="_blank">项目文档</a></Text>
-            </Body>
-        </Card>
-    </SpaceItem>
-</Space>
-
-<Divider><Title Level="4">如果帮助到了您，可用以下方式支持~🥤</Title></Divider>
-<Space Size=@(("10", "10" )) Wrap Align="start" Style="padding:10px">
-    <SpaceItem>
-        <ImagePreviewGroup>
-            <Image Width="300" Src="_content/Caviar.AntDesignUI/images/cc3d8991a036c94fcdc04a473e9b4d8.jpg" />
-            <Image Width="300" Src="_content/Caviar.AntDesignUI/images/e6b9e519eb0a5cb6e25af7193daa338.jpg" />
-        </ImagePreviewGroup>
-    </SpaceItem>
+    </SpaceItem> *@
 </Space>
 
 
@@ -128,6 +34,127 @@
     RenderFragment fork =@<Icon Type="fork" />;
     RenderFragment eye =@<Icon Type="eye" />;
     RenderFragment issues =@<Icon Type="issues-close" />;
-    RenderFragment GiteeTitle =@<a href="https://gitee.com/Cherryblossoms/caviar" target="_blank">Gitee</a>;
-    RenderFragment GitHubTitle =@<a href="https://github.com/BeiYinZhiNian/Caviar" target="_blank">GitHub</a>;
+
+    object[] data = new object[] {
+        new  { year= "1991", value= 3 },
+        new  { year= "1992", value= 4 },
+        new  { year= "1993", value= 3.5 },
+        new  { year= "1994", value= 5 },
+        new  { year= "1995", value= 4.9 },
+        new  { year= "1996", value= 6 },
+        new  { year= "1997", value= 7 },
+        new  { year= "1998", value= 9 },
+        new  { year= "1999", value= 13 },
+};
+
+    LineConfig config = new LineConfig()
+        {        
+            Title = new AntDesign.Charts.Title()
+            {
+                Visible = true,
+                Text = "曲线折线图",
+            },
+            Description = new Description()
+            {
+                Visible = true,
+                Text = "用平滑的曲线代替折线。",
+            },
+            Padding = "auto",
+            ForceFit = true,
+            XField = "year",
+            YField = "value",
+            Smooth = true,
+        };
+
+    readonly object[] data1 =
+   {
+        new {value = 1.2},
+        new {value = 3.4},
+        new {value = 3.7},
+        new {value = 4.3},
+        new {value = 5.2},
+        new {value = 5.8},
+        new {value = 6.1},
+        new {value = 6.5},
+        new {value = 6.8},
+        new {value = 7.1},
+        new {value = 7.3},
+        new {value = 7.7},
+        new {value = 8.3},
+        new {value = 8.6},
+        new {value = 8.8},
+        new {value = 9.1},
+        new {value = 9.2},
+        new {value = 9.4},
+        new {value = 9.5},
+        new {value = 9.7},
+        new {value = 10.5},
+        new {value = 10.7},
+        new {value = 10.8},
+        new {value = 11.0},
+        new {value = 11.0},
+        new {value = 11.1},
+        new {value = 11.2},
+        new {value = 11.3},
+        new {value = 11.4},
+        new {value = 11.4},
+        new {value = 11.7},
+        new {value = 12.0},
+        new {value = 12.9},
+        new {value = 12.9},
+        new {value = 13.3},
+        new {value = 13.7},
+        new {value = 13.8},
+        new {value = 13.9},
+        new {value = 14.0},
+        new {value = 14.2},
+        new {value = 14.5},
+        new {value = 15},
+        new {value = 15.2},
+        new {value = 15.6},
+        new {value = 16.0},
+        new {value = 16.3},
+        new {value = 17.3},
+        new {value = 17.5},
+        new {value = 17.9},
+        new {value = 18.0},
+        new {value = 18.0},
+        new {value = 20.6},
+        new {value = 21},
+        new {value = 23.4}
+    };
+
+    readonly HistogramConfig config1 = new HistogramConfig
+        {
+            Title = new AntDesign.Charts.Title
+            {
+                Visible = true,
+                Text = "直方图"
+            },
+            Description = new Description
+            {
+                Visible = true,
+                Text = "通过设置binNumber进行分箱，binNumber决定直方图分箱的区域。"
+            },
+            ForceFit = true,
+            Padding = "auto",
+            BinField = "value",
+            BinNumber = 10,
+            Color = new[] { "#1079a0" }
+        };
+
+    readonly object[] data3 =
+   {
+        new {action = "浏览网站", pv = 50000},
+        new {action = "放入购物车", pv = 35000},
+        new {action = "生成订单", pv = 25000},
+        new {action = "支付", pv = 15000},
+        new {action = "成交", pv = 8500}
+    };
+
+    readonly FunnelConfig config3 = new FunnelConfig
+        {
+            XField = "action",
+            YField = "pv"
+        };
 }
