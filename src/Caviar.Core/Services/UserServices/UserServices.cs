@@ -111,13 +111,21 @@ namespace Caviar.Core.Services
 
         public async Task<IdentityResult> UpdateUserDetailsAsync(UserDetails userDetails)
         {
-            var user = await GetCurrentUserInfoAsync();
+            var userinfo = await GetCurrentUserInfoAsync();
+            var user = await _userManager.FindByIdAsync(userinfo.Id.ToString());
+            if (user == null)
+                return new IdentityResult();
             user.AccountName = userDetails.AccountName;
             user.Email = userDetails.Email;
             user.PhoneNumber = userDetails.PhoneNumber;
             user.Remark = userDetails.Remark;
             user.HeadPortrait = userDetails.HeadPortrait;
-            return await _userManager.UpdateAsync(user);
+            var res =  await _userManager.UpdateAsync(user);
+            if (res.Succeeded)
+            {
+                _cacheManager.Clear();
+            }
+            return res;
         }
 
         public async Task<IdentityResult> UpdateUserAsync(string operatorUp, ApplicationUserView vm)
